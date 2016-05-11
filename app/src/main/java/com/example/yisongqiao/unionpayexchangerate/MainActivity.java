@@ -13,6 +13,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,7 +30,7 @@ import org.jsoup.select.Elements;
 public class MainActivity extends AppCompatActivity {
 
     private TextView textView;
-    private TextView textRate;
+    private ProgressBar progressBar;
     private SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
@@ -37,11 +38,20 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        if (progressBar != null) {
+            progressBar.setVisibility(View.VISIBLE);
+        }
+
+
 //        // hide actionbar
 //        if(getSupportActionBar() != null) {
 //            getSupportActionBar().hide();
 //        }
+        //progressBar.setVisibility(View.VISIBLE);
         new UnionPayRate().execute();
+
+
 
         //locate the TextView and Button
         textView = (TextView) findViewById(R.id.textView);
@@ -57,9 +67,9 @@ public class MainActivity extends AppCompatActivity {
 
     // Menu
     @Override
-    public boolean onCreateOptionsMenu (Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main,menu);
+        inflater.inflate(R.menu.main, menu);
         return true;
     }
 
@@ -100,8 +110,7 @@ public class MainActivity extends AppCompatActivity {
                 Elements rows = table.select("tr");
                 Elements cols = rows.get(1).select("td");
                 list = new ArrayList<String>();
-                for (int i = 0; i < cols.size(); i++)
-                {
+                for (int i = 0; i < cols.size(); i++) {
                     String col = cols.get(i).text();
                     list.add(col);
                 }
@@ -113,9 +122,10 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Void result) {
-            string  = list.get(0) + list.get(1) + list.get(2) + "  " + list.get(3) + "  " + list.get(4);
+            string = list.get(0) + list.get(1) + list.get(2) + "  " + list.get(3) + "  " + list.get(4);
             String temp = "1€=¥" + list.get(3);
             textView.setText(temp);
+            progressBar.setVisibility(View.GONE);
         }
     }
 

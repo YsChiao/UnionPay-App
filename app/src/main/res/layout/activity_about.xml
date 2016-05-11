@@ -10,11 +10,14 @@
     tools:context="com.example.yisongqiao.unionpayexchangerate.AboutActivity">
 
     <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:layout_height="100dp"
         android:id="@+id/aboutImageView"
         android:contentDescription="@string/content_description"
-        android:src="@drawable/logo"/>
+        android:src="@drawable/logo"
+        android:layout_alignBottom="@+id/aboutTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="100dp" />
 
     <TextView
         android:layout_width="match_parent"
