@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">UnionPay Exchange Tool</string>
     <string name="button_check">Check</string>
+    <string name="button_toast">data loaded</string>
+    <string name="menu_contact">Contact</string>
+    <string name="menu_about">About</string>
+    <string name="app_about">Version 0.1\n Yisong Qiao</string>
+    <string name="content_description">Union Pay</string>
 </resources>
