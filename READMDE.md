@@ -1,1 +1,0 @@
-UnionPay Exchange Tool
