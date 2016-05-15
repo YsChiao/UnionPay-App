@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.view.menu.MenuView;
 import android.text.InputType;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -52,9 +53,9 @@ public class MainActivity extends AppCompatActivity {
     private Button button8;
     private Button button9;
     private Button button_point;
-    private Button button_back;
+    //private Button button_back;
     private Button button_clear;
-    private Button button_done;
+    //private Button button_done;
 
     private double textDouble1;
     private double textDouble2;
@@ -105,9 +106,9 @@ public class MainActivity extends AppCompatActivity {
         button8 = (Button) findViewById(R.id.button_8);
         button9 = (Button) findViewById(R.id.button_9);
         button_point = (Button) findViewById(R.id.button_point);
-        button_back = (Button) findViewById(R.id.button_back);
+        //button_back = (Button) findViewById(R.id.button_back);
         button_clear = (Button) findViewById(R.id.button_clear);
-        button_done = (Button) findViewById(R.id.button_done);
+        //button_done = (Button) findViewById(R.id.button_done);
 
         // set input soft keyboard always hide
         editText1.setInputType(InputType.TYPE_NULL);
@@ -118,188 +119,462 @@ public class MainActivity extends AppCompatActivity {
 
 
         button0.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (editText1.hasFocus())
-                    editText1.setText(editText1.getText().insert(editText1.getText().length(), "0"));
-                else if (editText2.hasFocus())
-                    editText2.setText(editText2.getText().insert(editText2.getText().length(), "0"));
-            }
-        });
+                                       @Override
+                                       public void onClick(View v) {
+                                           if (editText1.hasFocus()) {
+                                               editText1.setText(editText1.getText().insert(editText1.getText().length(), "0"));
+                                               String string = editText1.getText().toString();
+                                               textDouble1 = Double.parseDouble(string);
+
+                                               // calculate textDouble2 value and show
+                                               Double data2 = textDouble1 / rate;
+                                               NumberFormat nm = NumberFormat.getNumberInstance();
+                                               nm.setMaximumFractionDigits(2);
+                                               nm.setMinimumFractionDigits(2);
+                                               editText2.setText(nm.format(data2));
+
+                                           } else if (editText2.hasFocus())
+
+                                           {
+                                               editText2.setText(editText2.getText().insert(editText2.getText().length(), "0"));
+                                               String string = editText2.getText().toString();
+                                               textDouble2 = Double.parseDouble(string);
+
+                                               // calculate textDouble2 value and show
+                                               Double data1 = textDouble2 * rate;
+                                               NumberFormat nm = NumberFormat.getNumberInstance();
+                                               nm.setMaximumFractionDigits(2);
+                                               nm.setMinimumFractionDigits(2);
+                                               editText1.setText(nm.format(data1));
+                                           }
+                                       }
+                                   }
+
+        );
 
         button1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (editText1.hasFocus())
-                    editText1.setText(editText1.getText().insert(editText1.getText().length(), "1"));
-                else if (editText2.hasFocus())
-                    editText2.setText(editText2.getText().insert(editText2.getText().length(), "1"));
-            }
-        });
+                                       @Override
+                                       public void onClick(View v) {
+                                           if (editText1.hasFocus()) {
+                                               editText1.setText(editText1.getText().insert(editText1.getText().length(), "1"));
+                                               String string = editText1.getText().toString();
+                                               textDouble1 = Double.parseDouble(string);
 
-        button2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (editText1.hasFocus())
-                    editText1.setText(editText1.getText().insert(editText1.getText().length(), "2"));
-                else if (editText2.hasFocus())
-                    editText2.setText(editText2.getText().insert(editText2.getText().length(), "2"));
-            }
-        });
+                                               // calculate textDouble2 value and show
+                                               Double data2 = textDouble1 / rate;
+                                               NumberFormat nm = NumberFormat.getNumberInstance();
+                                               nm.setMaximumFractionDigits(2);
+                                               nm.setMinimumFractionDigits(2);
+                                               editText2.setText(nm.format(data2));
 
-        button3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (editText1.hasFocus())
-                    editText1.setText(editText1.getText().insert(editText1.getText().length(), "3"));
-                else if (editText2.hasFocus())
-                    editText2.setText(editText2.getText().insert(editText2.getText().length(), "3"));
-            }
-        });
+                                           } else if (editText2.hasFocus()) {
+                                               editText2.setText(editText2.getText().insert(editText2.getText().length(), "1"));
+                                               String string = editText2.getText().toString();
+                                               textDouble2 = Double.parseDouble(string);
 
-        button4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (editText1.hasFocus())
-                    editText1.setText(editText1.getText().insert(editText1.getText().length(), "4"));
-                else if (editText2.hasFocus())
-                    editText2.setText(editText2.getText().insert(editText2.getText().length(), "4"));
-            }
-        });
+                                               // calculate textDouble2 value and show
+                                               Double data1 = textDouble2 * rate;
+                                               NumberFormat nm = NumberFormat.getNumberInstance();
+                                               nm.setMaximumFractionDigits(2);
+                                               nm.setMinimumFractionDigits(2);
+                                               editText1.setText(nm.format(data1));
+                                           }
+                                       }
+                                   }
 
-        button5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (editText1.hasFocus())
-                    editText1.setText(editText1.getText().insert(editText1.getText().length(), "5"));
-                else if (editText2.hasFocus())
-                    editText2.setText(editText2.getText().insert(editText2.getText().length(), "5"));
-            }
-        });
+        );
 
-        button6.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (editText1.hasFocus())
-                    editText1.setText(editText1.getText().insert(editText1.getText().length(), "6"));
-                else if (editText2.hasFocus())
-                    editText2.setText(editText2.getText().insert(editText2.getText().length(), "6"));
-            }
-        });
+        button2.setOnClickListener(new View.OnClickListener()
 
-        button7.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (editText1.hasFocus())
-                    editText1.setText(editText1.getText().insert(editText1.getText().length(), "7"));
-                else if (editText2.hasFocus())
-                    editText2.setText(editText2.getText().insert(editText2.getText().length(), "7"));
-            }
-        });
+                                   {
+                                       @Override
+                                       public void onClick(View v) {
+                                           if (editText1.hasFocus()) {
+                                               editText1.setText(editText1.getText().insert(editText1.getText().length(), "2"));
+                                               String string = editText1.getText().toString();
+                                               textDouble1 = Double.parseDouble(string);
 
-        button8.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (editText1.hasFocus())
-                    editText1.setText(editText1.getText().insert(editText1.getText().length(), "8"));
-                else if (editText2.hasFocus())
-                    editText2.setText(editText2.getText().insert(editText2.getText().length(), "8"));
-            }
-        });
+                                               // calculate textDouble2 value and show
+                                               Double data2 = textDouble1 / rate;
+                                               NumberFormat nm = NumberFormat.getNumberInstance();
+                                               nm.setMaximumFractionDigits(2);
+                                               nm.setMinimumFractionDigits(2);
+                                               editText2.setText(nm.format(data2));
+                                           } else if (editText2.hasFocus()) {
+                                               editText2.setText(editText2.getText().insert(editText2.getText().length(), "2"));
+                                               String string = editText2.getText().toString();
+                                               textDouble2 = Double.parseDouble(string);
 
-        button9.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (editText1.hasFocus())
-                    editText1.setText(editText1.getText().insert(editText1.getText().length(), "9"));
-                else if (editText2.hasFocus())
-                    editText2.setText(editText2.getText().insert(editText2.getText().length(), "9"));
-            }
-        });
+                                               // calculate textDouble2 value and show
+                                               Double data1 = textDouble2 * rate;
+                                               NumberFormat nm = NumberFormat.getNumberInstance();
+                                               nm.setMaximumFractionDigits(2);
+                                               nm.setMinimumFractionDigits(2);
+                                               editText1.setText(nm.format(data1));
+                                           }
+                                       }
+                                   }
 
-        button_point.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (editText1.hasFocus())
-                    editText1.setText(editText1.getText().insert(editText1.getText().length(), "."));
-                else if (editText2.hasFocus())
-                    editText2.setText(editText2.getText().insert(editText2.getText().length(), "."));
-            }
-        });
+        );
 
-        button_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (editText1.hasFocus()) {
-                    if (0 == editText1.length()) {
-                        return;
-                    } else {
-                        editText1.setText(editText1.getText().delete(editText1.getText().length() - 1, editText1.getText().length()));
-                    }
-                } else if (editText2.hasFocus()) {
-                    if (0 == editText2.length()) {
-                        return;
-                    } else {
-                        editText2.setText(editText2.getText().delete(editText2.getText().length() - 1, editText2.getText().length()));
-                    }
-                }
-            }
-        });
+        button3.setOnClickListener(new View.OnClickListener()
 
-        button_clear.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // all editText clear
-                editText1.setText("");
-                editText2.setText("");
+                                   {
+                                       @Override
+                                       public void onClick(View v) {
+                                           if (editText1.hasFocus()) {
+                                               editText1.setText(editText1.getText().insert(editText1.getText().length(), "3"));
+                                               String string = editText1.getText().toString();
+                                               textDouble1 = Double.parseDouble(string);
 
-            }
-        });
+                                               // calculate textDouble2 value and show
+                                               Double data2 = textDouble1 / rate;
+                                               NumberFormat nm = NumberFormat.getNumberInstance();
+                                               nm.setMaximumFractionDigits(2);
+                                               nm.setMinimumFractionDigits(2);
+                                               editText2.setText(nm.format(data2));
+                                           } else if (editText2.hasFocus()) {
+                                               editText2.setText(editText2.getText().insert(editText2.getText().length(), "3"));
+                                               String string = editText2.getText().toString();
+                                               textDouble2 = Double.parseDouble(string);
 
-        button_done.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (editText1.hasFocus()) {
-                    if (0 == editText1.length()) {
-                        return;
-                    } else {
-                        String string1 = editText1.getText().toString();
-                        textDouble1 = Double.parseDouble(string1);
-                        // set value in editText2
-                        Double data2 = textDouble1 / rate;
-                        NumberFormat nm = NumberFormat.getNumberInstance();
-                        nm.setMaximumFractionDigits(2);
-                        nm.setMinimumFractionDigits(2);
-                        editText2.setText(nm.format(data2));
-                    }
-                } else if (editText2.hasFocus()) {
-                    if (0 == editText2.length()) {
-                        return;
-                    } else {
-                        String string2 = editText2.getText().toString();
-                        textDouble2 = Double.parseDouble(string2);
-                        // set value in editText1
-                        Double data1 = textDouble2 * rate;
-                        NumberFormat nm = NumberFormat.getNumberInstance();
-                        nm.setMaximumFractionDigits(2);
-                        nm.setMinimumFractionDigits(2);
-                        editText1.setText(nm.format(data1));
-                    }
-                }
-            }
+                                               // calculate textDouble2 value and show
+                                               Double data1 = textDouble2 * rate;
+                                               NumberFormat nm = NumberFormat.getNumberInstance();
+                                               nm.setMaximumFractionDigits(2);
+                                               nm.setMinimumFractionDigits(2);
+                                               editText1.setText(nm.format(data1));
+                                           }
+                                       }
+                                   }
 
-        });
+        );
 
-        editText1.setOnEditorActionListener(new EditText.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    button_done.performClick();
-                    return true;
-                }
-                return false;
-            }
-        });
+        button4.setOnClickListener(new View.OnClickListener()
+
+                                   {
+                                       @Override
+                                       public void onClick(View v) {
+                                           if (editText1.hasFocus()) {
+                                               editText1.setText(editText1.getText().insert(editText1.getText().length(), "4"));
+                                               String string = editText1.getText().toString();
+                                               textDouble1 = Double.parseDouble(string);
+
+                                               // calculate textDouble2 value and show
+                                               Double data2 = textDouble1 / rate;
+                                               NumberFormat nm = NumberFormat.getNumberInstance();
+                                               nm.setMaximumFractionDigits(2);
+                                               nm.setMinimumFractionDigits(2);
+                                               editText2.setText(nm.format(data2));
+                                           } else if (editText2.hasFocus()) {
+                                               editText2.setText(editText2.getText().insert(editText2.getText().length(), "4"));
+                                               String string = editText2.getText().toString();
+                                               textDouble2 = Double.parseDouble(string);
+
+                                               // calculate textDouble2 value and show
+                                               Double data1 = textDouble2 * rate;
+                                               NumberFormat nm = NumberFormat.getNumberInstance();
+                                               nm.setMaximumFractionDigits(2);
+                                               nm.setMinimumFractionDigits(2);
+                                               editText1.setText(nm.format(data1));
+                                           }
+                                       }
+                                   }
+
+        );
+
+        button5.setOnClickListener(new View.OnClickListener()
+
+                                   {
+                                       @Override
+                                       public void onClick(View v) {
+                                           if (editText1.hasFocus()) {
+                                               editText1.setText(editText1.getText().insert(editText1.getText().length(), "5"));
+                                               String string = editText1.getText().toString();
+                                               textDouble1 = Double.parseDouble(string);
+
+                                               // calculate textDouble2 value and show
+                                               Double data2 = textDouble1 / rate;
+                                               NumberFormat nm = NumberFormat.getNumberInstance();
+                                               nm.setMaximumFractionDigits(2);
+                                               nm.setMinimumFractionDigits(2);
+                                               editText2.setText(nm.format(data2));
+                                           } else if (editText2.hasFocus()) {
+                                               editText2.setText(editText2.getText().insert(editText2.getText().length(), "5"));
+                                               String string = editText2.getText().toString();
+                                               textDouble2 = Double.parseDouble(string);
+
+                                               // calculate textDouble2 value and show
+                                               Double data1 = textDouble2 * rate;
+                                               NumberFormat nm = NumberFormat.getNumberInstance();
+                                               nm.setMaximumFractionDigits(2);
+                                               nm.setMinimumFractionDigits(2);
+                                               editText1.setText(nm.format(data1));
+                                           }
+                                       }
+                                   }
+
+        );
+
+        button6.setOnClickListener(new View.OnClickListener()
+
+                                   {
+                                       @Override
+                                       public void onClick(View v) {
+                                           if (editText1.hasFocus()) {
+                                               editText1.setText(editText1.getText().insert(editText1.getText().length(), "6"));
+                                               String string = editText1.getText().toString();
+                                               textDouble1 = Double.parseDouble(string);
+
+                                               // calculate textDouble2 value and show
+                                               Double data2 = textDouble1 / rate;
+                                               NumberFormat nm = NumberFormat.getNumberInstance();
+                                               nm.setMaximumFractionDigits(2);
+                                               nm.setMinimumFractionDigits(2);
+                                               editText2.setText(nm.format(data2));
+                                           } else if (editText2.hasFocus()) {
+                                               editText2.setText(editText2.getText().insert(editText2.getText().length(), "6"));
+                                               String string = editText2.getText().toString();
+                                               textDouble2 = Double.parseDouble(string);
+
+                                               // calculate textDouble2 value and show
+                                               Double data1 = textDouble2 * rate;
+                                               NumberFormat nm = NumberFormat.getNumberInstance();
+                                               nm.setMaximumFractionDigits(2);
+                                               nm.setMinimumFractionDigits(2);
+                                               editText1.setText(nm.format(data1));
+                                           }
+                                       }
+                                   }
+
+        );
+
+        button7.setOnClickListener(new View.OnClickListener()
+
+                                   {
+                                       @Override
+                                       public void onClick(View v) {
+                                           if (editText1.hasFocus()) {
+                                               editText1.setText(editText1.getText().insert(editText1.getText().length(), "7"));
+                                               String string = editText1.getText().toString();
+                                               textDouble1 = Double.parseDouble(string);
+
+                                               // calculate textDouble2 value and show
+                                               Double data2 = textDouble1 / rate;
+                                               NumberFormat nm = NumberFormat.getNumberInstance();
+                                               nm.setMaximumFractionDigits(2);
+                                               nm.setMinimumFractionDigits(2);
+                                               editText2.setText(nm.format(data2));
+                                           } else if (editText2.hasFocus()) {
+                                               editText2.setText(editText2.getText().insert(editText2.getText().length(), "7"));
+                                               String string = editText2.getText().toString();
+                                               textDouble2 = Double.parseDouble(string);
+
+                                               // calculate textDouble2 value and show
+                                               Double data1 = textDouble2 * rate;
+                                               NumberFormat nm = NumberFormat.getNumberInstance();
+                                               nm.setMaximumFractionDigits(2);
+                                               nm.setMinimumFractionDigits(2);
+                                               editText1.setText(nm.format(data1));
+                                           }
+                                       }
+                                   }
+
+        );
+
+        button8.setOnClickListener(new View.OnClickListener()
+
+                                   {
+                                       @Override
+                                       public void onClick(View v) {
+                                           if (editText1.hasFocus()) {
+                                               editText1.setText(editText1.getText().insert(editText1.getText().length(), "8"));
+                                               String string = editText1.getText().toString();
+                                               textDouble1 = Double.parseDouble(string);
+
+                                               // calculate textDouble2 value and show
+                                               Double data2 = textDouble1 / rate;
+                                               NumberFormat nm = NumberFormat.getNumberInstance();
+                                               nm.setMaximumFractionDigits(2);
+                                               nm.setMinimumFractionDigits(2);
+                                               editText2.setText(nm.format(data2));
+                                           } else if (editText2.hasFocus()) {
+                                               editText2.setText(editText2.getText().insert(editText2.getText().length(), "8"));
+                                               String string = editText2.getText().toString();
+                                               textDouble2 = Double.parseDouble(string);
+
+                                               // calculate textDouble2 value and show
+                                               Double data1 = textDouble2 * rate;
+                                               NumberFormat nm = NumberFormat.getNumberInstance();
+                                               nm.setMaximumFractionDigits(2);
+                                               nm.setMinimumFractionDigits(2);
+                                               editText1.setText(nm.format(data1));
+                                           }
+                                       }
+                                   }
+
+        );
+
+        button9.setOnClickListener(new View.OnClickListener()
+
+                                   {
+                                       @Override
+                                       public void onClick(View v) {
+                                           if (editText1.hasFocus()) {
+                                               editText1.setText(editText1.getText().insert(editText1.getText().length(), "9"));
+                                               String string = editText1.getText().toString();
+                                               textDouble1 = Double.parseDouble(string);
+
+                                               // calculate textDouble2 value and show
+                                               Double data2 = textDouble1 / rate;
+                                               NumberFormat nm = NumberFormat.getNumberInstance();
+                                               nm.setMaximumFractionDigits(2);
+                                               nm.setMinimumFractionDigits(2);
+                                               editText2.setText(nm.format(data2));
+                                           } else if (editText2.hasFocus()) {
+                                               editText2.setText(editText2.getText().insert(editText2.getText().length(), "9"));
+                                               String string = editText2.getText().toString();
+                                               textDouble2 = Double.parseDouble(string);
+
+                                               // calculate textDouble2 value and show
+                                               Double data1 = textDouble2 * rate;
+                                               NumberFormat nm = NumberFormat.getNumberInstance();
+                                               nm.setMaximumFractionDigits(2);
+                                               nm.setMinimumFractionDigits(2);
+                                               editText1.setText(nm.format(data1));
+                                           }
+                                       }
+                                   }
+
+        );
+
+        button_point.setOnClickListener(new View.OnClickListener()
+
+                                        {
+                                            @Override
+                                            public void onClick(View v) {
+                                                if (editText1.hasFocus()) {
+                                                    editText1.setText(editText1.getText().insert(editText1.getText().length(), "."));
+                                                    String string = editText1.getText().toString();
+                                                    textDouble1 = Double.parseDouble(string);
+                                                } else if (editText2.hasFocus()) {
+                                                    editText2.setText(editText2.getText().insert(editText2.getText().length(), "."));
+                                                    String string = editText2.getText().toString();
+                                                    textDouble2 = Double.parseDouble(string);
+                                                }
+                                            }
+                                        }
+
+        );
+
+//        button_back.setOnClickListener(new View.OnClickListener()
+//
+//                                       {
+//                                           @Override
+//                                           public void onClick(View v) {
+//                                               if (editText1.hasFocus()) {
+//                                                   if (0 == editText1.length()) {
+//                                                       return;
+//                                                   } else {
+//                                                       editText1.setText(editText1.getText().delete(editText1.getText().length() - 1, editText1.getText().length()));
+//                                                       String string = editText1.getText().toString();
+//                                                       textDouble1 = Double.parseDouble(string);
+//
+//                                                       // calculate textDouble2 value and show
+//                                                       Double data2 = textDouble1 / rate;
+//                                                       NumberFormat nm = NumberFormat.getNumberInstance();
+//                                                       nm.setMaximumFractionDigits(2);
+//                                                       nm.setMinimumFractionDigits(2);
+//                                                       editText2.setText(nm.format(data2));
+//                                                   }
+//                                               } else if (editText2.hasFocus()) {
+//                                                   if (0 == editText2.length()) {
+//                                                       return;
+//                                                   } else {
+//                                                       editText2.setText(editText2.getText().delete(editText2.getText().length() - 1, editText2.getText().length()));
+//                                                       String string = editText2.getText().toString();
+//                                                       textDouble2 = Double.parseDouble(string);
+//
+//                                                       // calculate textDouble2 value and show
+//                                                       Double data1 = textDouble2 * rate;
+//                                                       NumberFormat nm = NumberFormat.getNumberInstance();
+//                                                       nm.setMaximumFractionDigits(2);
+//                                                       nm.setMinimumFractionDigits(2);
+//                                                       editText1.setText(nm.format(data1));
+//                                                   }
+//                                               }
+//                                           }
+//                                       }
+//
+//        );
+
+        button_clear.setOnClickListener(new View.OnClickListener()
+
+                                        {
+                                            @Override
+                                            public void onClick(View v) {
+                                                // all editText clear
+                                                editText1.setText("");
+                                                editText2.setText("");
+                                                textDouble1 = 0;
+                                                textDouble2 = 0;
+                                            }
+                                        }
+
+        );
+
+//        button_done.setOnClickListener(new View.OnClickListener()
+//
+//                                       {
+//                                           @Override
+//                                           public void onClick(View v) {
+//                                               if (editText1.hasFocus()) {
+//                                                   if (0 == editText1.length()) {
+//                                                       return;
+//                                                   } else {
+//                                                       String string1 = editText1.getText().toString();
+//                                                       textDouble1 = Double.parseDouble(string1);
+//                                                       // set value in editText2
+//                                                       Double data2 = textDouble1 / rate;
+//                                                       NumberFormat nm = NumberFormat.getNumberInstance();
+//                                                       nm.setMaximumFractionDigits(2);
+//                                                       nm.setMinimumFractionDigits(2);
+//                                                       editText2.setText(nm.format(data2));
+//                                                   }
+//                                               } else if (editText2.hasFocus()) {
+//                                                   if (0 == editText2.length()) {
+//                                                       return;
+//                                                   } else {
+//                                                       String string2 = editText2.getText().toString();
+//                                                       textDouble2 = Double.parseDouble(string2);
+//                                                       // set value in editText1
+//                                                       Double data1 = textDouble2 * rate;
+//                                                       NumberFormat nm = NumberFormat.getNumberInstance();
+//                                                       nm.setMaximumFractionDigits(2);
+//                                                       nm.setMinimumFractionDigits(2);
+//                                                       editText1.setText(nm.format(data1));
+//                                                   }
+//                                               }
+//                                           }
+//
+//                                       }
+//
+//        );
+
+//        editText1.setOnEditorActionListener(new EditText.OnEditorActionListener()
+//
+//                                            {
+//                                                @Override
+//                                                public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+//                                                    if (actionId == EditorInfo.IME_ACTION_DONE) {
+//                                                        button_done.performClick();
+//                                                        return true;
+//                                                    }
+//                                                    return false;
+//                                                }
+//                                            }
+//
+//        );
 
     }
 
@@ -332,7 +607,6 @@ public class MainActivity extends AppCompatActivity {
         private URL url;
         private Document doc;
         private ArrayList<String> list;
-        private String string;
 
         //@Override
         protected void onPreExecute() {
@@ -343,7 +617,7 @@ public class MainActivity extends AppCompatActivity {
         protected Void doInBackground(Void... params) {
             try {
                 url = new URL("http://www.kuaiyilicai.com/huilv/c-eur.html");
-                doc = Jsoup.parse(url, 3000);
+                doc = Jsoup.parse(url, 10000);
                 Element table = doc.select("table").get(1);
                 Elements rows = table.select("tr");
                 Elements cols = rows.get(1).select("td");
@@ -360,7 +634,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Void result) {
-            string = list.get(0) + list.get(1) + list.get(2) + "  " + list.get(3) + "  " + list.get(4);
+            // String string = list.get(0) + list.get(1) + list.get(2) + "  " + list.get(3) + "  " + list.get(4);
             String temp = "1€=¥" + list.get(3);
             rate = Double.parseDouble(list.get(3));
             textView.setText(temp);

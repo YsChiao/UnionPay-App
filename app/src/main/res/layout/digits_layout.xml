@@ -37,13 +37,13 @@
                 android:text="@string/button_3"
                 android:textSize="30sp" />
 
-            <Button
-                android:id="@+id/button_back"
-                style="?android:attr/borderlessButtonStyle"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@string/button_back"
-                android:textSize="30sp" />
+            <!--<Button-->
+                <!--android:id="@+id/button_back"-->
+                <!--style="?android:attr/borderlessButtonStyle"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:gravity="center"-->
+                <!--android:text="@string/button_back"-->
+                <!--android:textSize="30sp" />-->
 
         </TableRow>
 
@@ -75,13 +75,13 @@
                 android:text="@string/button_6"
                 android:textSize="30sp" />
 
-            <Button
-                android:id="@+id/button_clear"
-                style="?android:attr/borderlessButtonStyle"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@string/button_clear"
-                android:textSize="30sp" />
+            <!--<Button-->
+                <!--android:id="@+id/button_clear"-->
+                <!--style="?android:attr/borderlessButtonStyle"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:gravity="center"-->
+                <!--android:text="@string/button_clear"-->
+                <!--android:textSize="30sp" />-->
 
         </TableRow>
 
@@ -133,12 +133,20 @@
                 android:textSize="30sp" />
 
             <Button
-                android:id="@+id/button_done"
+                android:id="@+id/button_clear"
                 style="?android:attr/borderlessButtonStyle"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="@string/button_done"
+                android:text="@string/button_clear"
                 android:textSize="30sp" />
+
+            <!--<Button-->
+                <!--android:id="@+id/button_done"-->
+                <!--style="?android:attr/borderlessButtonStyle"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:gravity="center"-->
+                <!--android:text="@string/button_done"-->
+                <!--android:textSize="30sp" />-->
 
         </TableRow>
 
