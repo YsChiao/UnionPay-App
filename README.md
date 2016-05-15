@@ -7,6 +7,5 @@ v.0.2.2
 1. redesign EditText, add ProgressDialog	
 2. touch click cuccurecy change		
 3. change size of button 	
-
-![Alt Text](images/v.0.2.2.png =360x640)	
+	
 <img src="images/v.0.2.2.png" width="360">	
