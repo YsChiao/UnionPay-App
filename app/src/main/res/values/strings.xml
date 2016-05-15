@@ -1,9 +1,26 @@
 <resources>
-    <string name="app_name">UnionPay Exchange Tool</string>
+    <string name="app_name">UnionPay EX</string>
     <string name="button_check">Check</string>
     <string name="button_toast">data loaded</string>
     <string name="menu_contact">Contact</string>
     <string name="menu_about">About</string>
     <string name="app_about">Version 0.1\n Yisong Qiao</string>
     <string name="content_description">Union Pay</string>
+    <string name="button_0">0</string>
+    <string name="button_1">1</string>
+    <string name="button_2">2</string>
+    <string name="button_3">3</string>
+    <string name="button_4">4</string>
+    <string name="button_5">5</string>
+    <string name="button_6">6</string>
+    <string name="button_7">7</string>
+    <string name="button_8">8</string>
+    <string name="button_9">9</string>
+    <string name="button_point">.</string>
+    <string name="button_back">CE</string>
+    <string name="button_done">=</string>
+    <string name="button_clear">C</string>
+    <string name="base_currency">CNY</string>
+    <string name="currency">EUR</string>
+
 </resources>

@@ -9,6 +9,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.yisongqiao.unionpayexchangerate.MainActivity">
 
+
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/refresh_layout"
         android:layout_width="match_parent"
@@ -25,21 +26,82 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="0dp"
                 android:gravity="center_horizontal"
-                android:text="" />
-
+                android:text=""
+                android:textSize="15sp"/>
         </ScrollView>
+
 
     </android.support.v4.widget.SwipeRefreshLayout>
 
 
     <ProgressBar
         android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyle"
+        style="?android:attr/progressBarStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
         android:progressDrawable="@drawable/circular_progress_view" />
+
+
+    <TableLayout
+        android:id="@+id/currency_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:stretchColumns="1">
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/base_currency"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:gravity="center"
+                android:text="@string/base_currency"
+                android:textSize="30sp" />
+
+            <EditText
+                android:id="@+id/base_currency_input"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:inputType="none"
+                android:maxLength="12"
+                android:gravity="end"
+                android:textSize="30sp"
+                android:singleLine="true"
+                android:imeOptions="actionDone"/>
+
+        </TableRow>
+
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/currency"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:gravity="center"
+                android:text="@string/currency"
+                android:textSize="30sp" />
+
+            <EditText
+                android:id="@+id/currency_input"
+                android:inputType="none"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:maxLength="12"
+                android:gravity="end"
+                android:textSize="30sp"
+                android:singleLine="true"
+                android:imeOptions="actionDone"/>
+
+        </TableRow>
+    </TableLayout>
+
+
+    <include layout="@layout/digits_layout" />
 
 
 </RelativeLayout>
