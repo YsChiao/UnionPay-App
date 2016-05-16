@@ -66,8 +66,7 @@
             <Button
                 android:id="@+id/button_6"
                 style="?android:attr/borderlessButtonStyle"
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
+                android:layout_height="80dp"
                 android:background="@drawable/cell_shape"
                 android:gravity="center"
                 android:text="@string/button_6"

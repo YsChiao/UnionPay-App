@@ -22,5 +22,8 @@
     <string name="button_clear">C</string>
     <string name="base_currency">CNY</string>
     <string name="currency">EUR</string>
+    <string name="Internet_No">No Internet Connection</string>
+    <string name="Internet_retry">Try Again</string>
+    <string name="Exit">Exit</string>
 
 </resources>

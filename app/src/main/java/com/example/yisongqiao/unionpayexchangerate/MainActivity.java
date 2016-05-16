@@ -1,10 +1,16 @@
 package com.example.yisongqiao.unionpayexchangerate;
 
 import android.app.ProgressDialog;
-import android.content.ClipData;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.AsyncTask;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
@@ -37,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
     private TextView textView;
     private TextView base_currency_view;
     private TextView currency_view;
-    private ProgressBar progressBar;
     private ProgressDialog progressDialog;
     private SwipeRefreshLayout swipeRefreshLayout;
     private EditText editText1;
@@ -59,6 +64,16 @@ public class MainActivity extends AppCompatActivity {
     private double textDouble2;
     private double rate;
     private boolean point_bool = false;
+    private boolean timeout_bool = false;
+
+    public BroadcastReceiver receiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            int internetStatus = NetworkUtil.getConnectivityStatus(context);
+            String status = NetworkUtil.getConnectivityStatusString(context);
+            Log.v("BroadcastReceiver", status);
+        }
+    };
 
 
     @Override
@@ -66,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
         if (progressBar != null) {
             progressBar.setVisibility(View.GONE);
             //progressBar.setVisibility(View.VISIBLE);
@@ -123,8 +138,8 @@ public class MainActivity extends AppCompatActivity {
 
         // set editText1 focus as default
         editText1.requestFocus();
-        base_currency_view.setTextColor(getResources().getColor(R.color.colorSelected));
-        editText1.setTextColor(getResources().getColor(R.color.colorSelected));
+        base_currency_view.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorSelected));
+        editText1.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorSelected));
 
         button0.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -613,12 +628,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus) {
-                    base_currency_view.setTextColor(getResources().getColor(R.color.colorSelected));
-                    editText1.setTextColor(getResources().getColor(R.color.colorSelected));
+                    base_currency_view.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorSelected));
+                    editText1.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorSelected));
                     Log.v("editText1", "selected");
                 } else {
-                    base_currency_view.setTextColor(getResources().getColor(R.color.colorUnSelected));
-                    editText1.setTextColor(getResources().getColor(R.color.colorUnSelected));
+                    base_currency_view.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorUnSelected));
+                    editText1.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorUnSelected));
                     Log.v("editText1", "unselected");
                 }
             }
@@ -628,16 +643,30 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus) {
-                    currency_view.setTextColor(getResources().getColor(R.color.colorSelected));
-                    editText2.setTextColor(getResources().getColor(R.color.colorSelected));
+                    currency_view.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorSelected));
+                    editText2.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorSelected));
                     Log.v("editText2", "selected");
                 } else {
-                    currency_view.setTextColor(getResources().getColor(R.color.colorUnSelected));
-                    editText2.setTextColor(getResources().getColor(R.color.colorUnSelected));
+                    currency_view.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorUnSelected));
+                    editText2.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorUnSelected));
                     Log.v("editText2", "unselected");
                 }
             }
         });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        // BroadcastReceiver register
+        registerReceiver(receiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        // BroadcastReceiver unregister
+        unregisterReceiver(receiver);
     }
 
     // Menu
@@ -664,6 +693,32 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    // AlertDialog
+    private void InternetConnectionDialog(Context context) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setMessage(R.string.Internet_No);
+        builder.setCancelable(false);
+
+        builder.setPositiveButton(
+                R.string.Internet_retry,
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        //if (0 == internetStatus)
+                        progressDialog.show();
+                        new UnionPayRate().execute();
+                    }
+                });
+
+        builder.setNegativeButton(
+                R.string.Exit,
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        MainActivity.this.finish();
+                    }
+                });
+        builder.show();
+    }
+
     // logic WebContent load
     public class UnionPayRate extends AsyncTask<Void, Void, Void> {
         private URL url;
@@ -680,14 +735,17 @@ public class MainActivity extends AppCompatActivity {
             try {
                 url = new URL("http://www.kuaiyilicai.com/huilv/c-eur.html");
                 try {
-                    doc = Jsoup.connect(url.toString()).timeout(10 * 1000).get();
+                    doc = Jsoup.connect(url.toString()).timeout(3 * 1000).get();
+                    Log.v("Jsoup", "success");
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    Log.v("Jsoup", "failed");
+                    timeout_bool = true;
+                    return null;
                 }
                 Element table = doc.select("table").get(1);
                 Elements rows = table.select("tr");
                 Elements cols = rows.get(1).select("td");
-                list = new ArrayList<String>();
+                list = new ArrayList<>();
                 for (int i = 0; i < cols.size(); i++) {
                     String col = cols.get(i).text();
                     list.add(col);
@@ -701,12 +759,18 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void result) {
             // String string = list.get(0) + list.get(1) + list.get(2) + "  " + list.get(3) + "  " + list.get(4);
+
+            // timeout exception
+            if (timeout_bool) {
+                timeout_bool = false;
+                progressDialog.dismiss();
+                InternetConnectionDialog(MainActivity.this);
+                return;
+            }
             String temp = "€ 1 = ¥ " + list.get(3);
             rate = Double.parseDouble(list.get(3));
             textView.setText(temp);
-            //progressBar.setVisibility(View.GONE);
             progressDialog.dismiss();
         }
     }
-
 }
